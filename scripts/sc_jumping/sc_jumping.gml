@@ -7,15 +7,16 @@ function sc_jumping()
 
 	if (vel_x <= jump.speed_x)
 	{
-		if (vel_x == 0)
+		if (vel_x <= 0)
 		{
-			vel_x += (jump.speed_x/12);
+			vel_x += (jump.speed_x/6);
 		}
 		
 		vel_x += 1;
 	}
 	
-	vel_x = jump.speed_x;
+	//vel_x = jump.speed_x;
+	
 	if ((vel_y <= jump.height) && can_rise)
 	{
 		if (vel_y == 0)
