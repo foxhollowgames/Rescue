@@ -48,7 +48,10 @@ function sc_moving()
 		// is temporary.
 		var _collision_found = check_collision(_move_once, 0);
 		
-		x += _move_once;
+		if(_collision_found == false || object_get_name(object_index) == obj_ground)
+		{
+			x += _move_once;
+		}
 	}
 
 	// We now repeat all of the previous steps to check for collisions

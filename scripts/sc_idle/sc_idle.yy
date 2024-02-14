@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Actions",
-    "path": "folders/Scripts/World Setup/Actions.yy",
+    "name": "States",
+    "path": "folders/Scripts/World Setup/States.yy",
   },
 }

@@ -7,9 +7,9 @@ if (!global.player.has_jumped)
 	global.player.has_jumped = true;
 }
 
-	if (vel_y == 0)
-	{
-		can_rise = true;
-	}
+if (vel_y == 0)
+{
+	can_rise = true;
+}
 	
-	sc_jumping();
+sc_jumping();

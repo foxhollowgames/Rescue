@@ -38,6 +38,8 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Timelines","folderPath":"folders/Timelines.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Blocks and slopes","folderPath":"folders/Sprites/Blocks and slopes.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Enemies","folderPath":"folders/Sprites/Enemies.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Movement","folderPath":"folders/Scripts/World Setup/Actions/Movement.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"States","folderPath":"folders/Scripts/World Setup/States.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
