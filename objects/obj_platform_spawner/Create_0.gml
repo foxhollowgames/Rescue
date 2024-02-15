@@ -36,4 +36,6 @@ spawn_y = noone;
 
 min_distance = 150;
 
-most_recent = instance_create_layer(obj_player.x, obj_player.y + 700,"platform_layer", obj_ground);
+most_recent = instance_create_layer(0, 0, "platform_layer", obj_ground);
+
+//instance_create_layer(obj_player.x, obj_player.y + 700,"platform_layer", obj_ground);

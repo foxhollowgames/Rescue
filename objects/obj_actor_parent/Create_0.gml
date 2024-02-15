@@ -8,7 +8,7 @@ grounded_y = y;
 vel_x = 0;
 vel_y = 0;
 
-grav_speed = 1;
+grav_speed = -1;
 
 jump =  
 {

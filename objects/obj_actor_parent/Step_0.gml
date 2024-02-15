@@ -27,7 +27,7 @@ switch (state)
 			state = STATES.IDLE;
 		}
 		
-		if (vel_y > 0)
+		if (vel_y < 0)
 		{
 			state = STATES.JUMPING;
 		}

@@ -4,7 +4,6 @@ function sc_player_create()
 	// Define global struct for PLAYER
 	global.player = 
 	{
-		player_state: STATES.IDLE,
 		jump: 
 		{
 			height: 7,
