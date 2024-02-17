@@ -8,7 +8,7 @@ grounded_y = y;
 vel_x = 0;
 vel_y = 0;
 
-grav_speed = -1;
+grav_speed = -.2;
 
 jump =  
 {
@@ -29,3 +29,7 @@ fall_sprite = noone;
 // Easy utility variables
 on_floor = 0;
 on_ceiling = place_meeting(x, y - 1, obj_collision);
+
+// Set up iframes timers
+damaged_frames = 120;
+damaged_frame_counter = damaged_frames;

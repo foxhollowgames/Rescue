@@ -1,1 +1,0 @@
-state = STATES.FALLING;

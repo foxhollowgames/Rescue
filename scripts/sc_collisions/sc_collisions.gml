@@ -16,7 +16,7 @@ function check_collision(_move_x, _move_y)
 		{
 			sprite_index = idle_sprite;
 			jump.current_count = 0;
-			can_rise = true;
+			//can_rise = true;
 		}
 		return true;
 	}
