@@ -1,10 +1,3 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description Set directional flag
 
-
-
-
-
-
-
-
+angle_sign = 1;

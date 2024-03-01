@@ -8,7 +8,7 @@ grounded_y = y;
 vel_x = 0;
 vel_y = 0;
 
-grav_speed = -.2;
+grav_speed = 0;
 
 jump =  
 {
@@ -32,4 +32,12 @@ on_ceiling = place_meeting(x, y - 1, obj_collision);
 
 // Set up iframes timers
 damaged_frames = 120;
-damaged_frame_counter = damaged_frames;
+damaged_counter = 0;
+
+// Set up vulnerability timers for enemy dodge windows
+vulnerable_frames = 60;
+vulnerable_counter = vulnerable_frames;
+
+// Set up cooldown after attack
+cooldown_frames = 300;
+cooldown_counter = cooldown_frames;

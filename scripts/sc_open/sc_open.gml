@@ -9,5 +9,11 @@ function sc_open(){
 	}
 	
 	global.player.tribute += value;
+	global.player.tribute_counter++;
+	if (global.player.tribute_counter >= global.player.gather_rate && obj_player.gather_tribute)
+	{
+		global.player.tribute++;
+		global.player.tribute_counter = 0;
+	}
 	instance_destroy(self);
 }

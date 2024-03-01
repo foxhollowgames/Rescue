@@ -30,8 +30,8 @@ function sc_boons_create()
 		},	
 	
 		jump_height_down: {
-			name: "Jump Height Down",
-			effect: "Jump Height Down",
+			name: "Jump Length",
+			effect: "Jump Length",
 			// Do we want both rarity and relationship_threshold?
 			rarity: "common",
 			relationship_threshold: 0

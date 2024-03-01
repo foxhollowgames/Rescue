@@ -24,8 +24,8 @@
     "Keyframes": [],
   },
   "parent": {
-    "name": "JUMP-GAME",
-    "path": "JUMP-GAME.yyp",
+    "name": "Sequences",
+    "path": "folders/Sequences.yy",
   },
   "playback": 0,
   "playbackSpeed": 60.0,

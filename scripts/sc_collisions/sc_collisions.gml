@@ -4,21 +4,35 @@
 // _move_y).
 // The function returns true if a collision was found,
 // or false if a collision was not found.
-function check_collision(_move_x, _move_y) 
+function check_collision() 
 {
 	
 	// Check floor collision
-	_obj_collision_check = place_meeting(x, y - _move_y, [obj_collision]);
-	if ((_obj_collision_check > 0) && (vel_y <= 0))
+	// State machine is incredibly busted here, don't know why
+
+	
+	if ( (state != STATES.IDLE || state != STATES.JUMPING) && place_meeting(x, bbox_bottom + 1, obj_collision))
 	{
+		if (object_get_name(object_index) == "obj_player")
+		{
+			if (!on_floor)
+			{
+			}
+
+		}
 		on_floor = true;
+		vel_y = 0;
 		if (object_get_parent(object_index) == obj_actor_parent)
 		{
 			sprite_index = idle_sprite;
 			jump.current_count = 0;
-			//can_rise = true;
 		}
 		return true;
+	}
+	
+	else
+	{
+		on_floor = false;
 	}
 	
 	return false;

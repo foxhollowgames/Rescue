@@ -23,5 +23,7 @@ function sc_player_create()
 	
 		acquired_boons: [],
 		tribute: 0,
+		gather_rate: 10,
+		tribute_counter: 0
 	};
 }

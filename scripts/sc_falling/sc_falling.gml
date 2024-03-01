@@ -9,10 +9,5 @@ function sc_state_falling()
 	// Doing so applies gravity to the character's vertical
 	// velocity, pulling it down each frame to make it fall.
 	vel_y += grav_speed;
-	
-	// If grounded, reset state to idle
-	if(grounded == true)
-	{
-		state = STATES.IDLE;
-	}
+
 }

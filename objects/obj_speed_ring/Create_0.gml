@@ -1,10 +1,3 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description
 
-
-
-
-
-
-
-
+speed_boost = 3;

@@ -1,10 +1,3 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description Give x speed boost
 
-
-
-
-
-
-
-
+vel_x += obj_speed_ring.speed_boost;

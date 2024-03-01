@@ -2,19 +2,9 @@
 if (global.player.has_jumped)
 {
 	sc_moving();
-	//sc_gravity();
+	check_collision();
 }
 
-if (place_meeting(x, y+1, obj_collision))
-{
-	on_floor = true;
-	if (object_get_parent(object_index) == obj_actor_parent)
-	{
-		sprite_index = idle_sprite;
-		jump.current_count = 0;
-		//can_rise = true;
-	}
-}
 
 // Check for states, then set appropriate sprite and run relevant script
 switch (state)
@@ -24,13 +14,34 @@ switch (state)
 		{
 			state = STATES.JUMPING;
 		}
-		break;
-			
-	case STATES.JUMPING:
-		if (vel_y <= 0)
+		
+		if (vel_y > 0)
 		{
 			state = STATES.FALLING;
 		}
+		
+		if (vulnerable_counter < vulnerable_frames && vulnerable_counter != 0)
+		{
+			state = STATES.VULNERABLE;
+		}
+		
+		if (damaged_frame_counter < damaged_frames && damaged_frame_counter > 0)
+		{
+			state = STATES.DAMAGED;
+		}
+		break;
+			
+	case STATES.JUMPING:
+		if (vel_y >= 0)
+		{
+			state = STATES.FALLING;
+		}
+		
+		if (damaged_frame_counter < damaged_frames && damaged_frame_counter > 0)
+		{
+			state = STATES.DAMAGED;
+		}
+		
 		break;
 		
 	case STATES.FALLING:
@@ -43,6 +54,12 @@ switch (state)
 		{
 			state = STATES.JUMPING;
 		}
+		
+		if (damaged_frame_counter > 0)
+		{
+			state = STATES.DAMAGED;
+		}
+		
 		break;
 			
 			
@@ -50,7 +67,6 @@ switch (state)
 		// Run an animation, then reset state to idle
 		if (damaged_frame_counter <= 0)
 		{
-			damaged_frame_counter = damaged_frames;
 			if (on_floor)
 			{
 				state = STATES.IDLE;
@@ -66,11 +82,24 @@ switch (state)
 				state = STATES.FALLING;
 			}
 		}
-		else
-		{
-			damaged_frame_counter--;
-		}
+		
 		break;
+		
+	case STATES.VULNERABLE:
+		if (vulnerable_counter <= 0)
+		{
+			state = STATES.ATTACKING;
+		}
+		if (damaged_frame_counter > 0)
+		{
+			state = STATES.DAMAGED;
+		}
+		
+	case STATES.ATTACKING:
+		if (vel_x == 0)
+		{
+			state = STATES.IDLE;
+		}
 			
 	case STATES.DEATH:
 		// Run the animation, then destroy
@@ -79,4 +108,9 @@ switch (state)
 	case STATES.MOVING:
 		// Check if attacking, then move state
 		break;	
+}
+
+if (damaged_frame_counter > 0)
+{
+	damaged_frame_counter--;
 }
