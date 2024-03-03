@@ -9,10 +9,14 @@ else if (shield <= 0)
 {
 	damaged_counter = damaged_frames;
 	health--;
+	
+	state = STATES.DAMAGED;
 }
 
 else
 {
 	damaged_counter = damaged_frames;
 	shield--;
+
+	state = STATES.DAMAGED;
 }

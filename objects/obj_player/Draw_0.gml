@@ -38,12 +38,13 @@ else if (state == STATES.MOVING)
 
 draw_text(x, y-50, _state);
 
-draw_text(x, y - 100, "Vel_y: " + string(vel_y));
-draw_text(x, y - 125, "Vel_x: " + string(vel_x));
+//draw_text(x, y - 100, "Vel_y: " + string(vel_y));
+//draw_text(x, y - 125, "Vel_x: " + string(vel_x));
 
-draw_text(x, y - 150, "Tribute: " + string(global.player.tribute));
+draw_text(x, y - 75, "Tribute: " + string(global.player.tribute));
 
-draw_text(x, y - 75, on_floor);
+draw_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom, true);
+
 
 // Draw health
 for (var _health_count = 0; _health_count < health; _health_count++)

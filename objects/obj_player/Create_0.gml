@@ -33,20 +33,21 @@ gather_tribute = false;
 // Dash variables
 attack_speed_x = 10;
 attack_speed_y = 15;
-attack_frames = 12;
+attack_frames = 20;
 attack_counter = attack_frames;
-attack_dir = 0;
+attack_dir = noone;
 closest_enemy = noone;
 
 // Jumping variables
-jumpSpd = -2.5;
+jumpSpd = -3;
+jump_x = 3;
 jumpBoost = -2.5;
 jumpMax = 2;
 jumpCount = 0;
 jumpHoldFrames = 15;
 jumpTimer = 0;
 
-jump.height = 12;
+jump.height = 24;
 jump.speed_x = 2;
 //jump.max_count = 1;
 //jump.frame_max = 7;

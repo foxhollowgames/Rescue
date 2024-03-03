@@ -69,7 +69,7 @@ jumpKeyHold = keyboard_check(vk_space);
 	{
 		// Constantly set the vel_y to be the jumpSpd
 		vel_y = jumpSpd;
-		vel_x = 4 + x_boost;
+		vel_x = jump_x + x_boost;
 	
 		// Decrement the timer
 		jumpTimer--;
@@ -84,9 +84,7 @@ jumpKeyHold = keyboard_check(vk_space);
 	// Check if the player has hit ground after groundpounding and reset scroll speed	
 	if (place_meeting(x, y+ (sprite_height / 2) + 1, obj_collision))
 	{
-		layer_clear_fx("Instances");
-		global.scroll_speed = abs(global.scroll_rate) * -1;
-
+		sc_clear_time_stop();
 	}
 	
 
@@ -97,7 +95,7 @@ jumpKeyHold = keyboard_check(vk_space);
 	if (instance_exists(obj_enemy_parent))
 	{
 		closest_enemy = instance_nearest(x, y, obj_enemy_parent);
-		if (distance_to_object(closest_enemy) < closest_enemy.attack_radius && closest_enemy.state == STATES.VULNERABLE)
+		if (distance_to_object(closest_enemy) < closest_enemy.attack_radius && closest_enemy.state == STATES.VULNERABLE && closest_enemy.x > x)
 		{
 			image_blend = make_color_hsv(255, 255, c_green);
 			if (jumpKeyPressed && attack_counter > 0)
@@ -122,7 +120,6 @@ jumpKeyHold = keyboard_check(vk_space);
 		}
 		
 		vulnerable_counter = 0;
-		//move_towards_point(obj_enemy_parent.x, obj_enemy_parent.y, 20);
 		
 		// If not teleport dash, set velocity
 		if (!teleport_dash)
@@ -130,6 +127,8 @@ jumpKeyHold = keyboard_check(vk_space);
 			vel_x = lengthdir_x(attack_speed_x, attack_dir) + x_boost;
 			vel_y = lengthdir_y(attack_speed_y, attack_dir);
 		}
+		
+		// Else, teleport to furthest enemy on screen
 		else
 		{
 			if (obj_spawner.most_recent_enemy.x + 100 <= room_width)

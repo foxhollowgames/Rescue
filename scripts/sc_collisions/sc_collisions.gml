@@ -20,8 +20,9 @@ function check_collision()
 			}
 
 		}
+		
 		on_floor = true;
-		vel_y = 0;
+
 		if (object_get_parent(object_index) == obj_actor_parent)
 		{
 			sprite_index = idle_sprite;

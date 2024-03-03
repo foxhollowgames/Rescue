@@ -21,7 +21,8 @@ function sc_world_create()
 	
 	audio_play_sound(mus_reflections, 1, true);
 
-	global.scroll_rate = 3;
+	global.scroll_rate_ini = 3;
+	global.scroll_rate = global.scroll_rate_ini;
 	global.scroll_speed =  abs(global.scroll_rate) * -1;
 	
 	// Set up variables for the shrine checkpoints

@@ -25,7 +25,7 @@ switch (state)
 			state = STATES.VULNERABLE;
 		}
 		
-		if (damaged_frame_counter < damaged_frames && damaged_frame_counter > 0)
+		if (damaged_counter < damaged_frames && damaged_counter > 0)
 		{
 			state = STATES.DAMAGED;
 		}
@@ -37,7 +37,7 @@ switch (state)
 			state = STATES.FALLING;
 		}
 		
-		if (damaged_frame_counter < damaged_frames && damaged_frame_counter > 0)
+		if (damaged_counter < damaged_frames && damaged_counter > 0)
 		{
 			state = STATES.DAMAGED;
 		}
@@ -55,7 +55,7 @@ switch (state)
 			state = STATES.JUMPING;
 		}
 		
-		if (damaged_frame_counter > 0)
+		if (damaged_counter > 0)
 		{
 			state = STATES.DAMAGED;
 		}
@@ -65,7 +65,7 @@ switch (state)
 			
 	case STATES.DAMAGED:
 		// Run an animation, then reset state to idle
-		if (damaged_frame_counter <= 0)
+		if (damaged_counter <= 0)
 		{
 			if (on_floor)
 			{
@@ -90,7 +90,7 @@ switch (state)
 		{
 			state = STATES.ATTACKING;
 		}
-		if (damaged_frame_counter > 0)
+		if (damaged_counter > 0)
 		{
 			state = STATES.DAMAGED;
 		}
@@ -110,7 +110,7 @@ switch (state)
 		break;	
 }
 
-if (damaged_frame_counter > 0)
+if (damaged_counter > 0)
 {
-	damaged_frame_counter--;
+	damaged_counter--;
 }
