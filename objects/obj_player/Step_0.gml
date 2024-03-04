@@ -36,20 +36,17 @@ jumpKeyHold = keyboard_check(vk_space);
 		}
 	}
 
-	// Initiate our jump
+	// Air jumping
 	// TODO: Understand state machines....
 	if (jumpKeyPressed && jumpCount < jumpMax) 
 	{
 		vel_y = 0;
 			
-		// Set on_floor to false
-		//on_floor = false;
 	
 		// Increment your number of performed jumps
 		jumpCount++;
 
 		audio_play_sound(jump_1, 2, false);
-		//show_debug_message(jumpCount);
 		
 		// Set the jump timer
 		jumpTimer = jumpHoldFrames;
@@ -65,7 +62,7 @@ jumpKeyHold = keyboard_check(vk_space);
 	}
 
 	// Jump based on the timer
-	if (jumpTimer > 0)
+	if (jumpKeyHold && jumpTimer > 0)
 	{
 		// Constantly set the vel_y to be the jumpSpd
 		vel_y = jumpSpd;
@@ -75,14 +72,14 @@ jumpKeyHold = keyboard_check(vk_space);
 		jumpTimer--;
 	}	
 
-	else if (jumpKeyPressed && jumpTimer <= 0)
+	else if (jumpKeyPressed && jumpCount >= jumpMax)
 	{
 		sc_ground_pound();
 	}
 
 	
 	// Check if the player has hit ground after groundpounding and reset scroll speed	
-	if (place_meeting(x, y+ (sprite_height / 2) + 1, obj_collision))
+	if (place_meeting(x, bbox_bottom + 1, obj_collision))
 	{
 		sc_clear_time_stop();
 	}

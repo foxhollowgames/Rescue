@@ -16,9 +16,10 @@ on_floor = true;
 // Set sprites for states
 moving_sprite = noone;
 idle_sprite = spr_dog_idle;
-jump_sprite = spr_jump_sprite;
-fall_sprite = spr_falling;
-
+jump_sprite = spr_dog_idle;
+fall_sprite = spr_dog_idle;
+//jump_sprite = spr_jump_sprite;
+//fall_sprite = spr_falling;
 
 // Movement variables
 x_boost = 0;

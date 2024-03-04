@@ -27,7 +27,7 @@ jump_sprite = noone;
 fall_sprite = noone;
 
 // Easy utility variables
-on_floor = 0;
+on_floor = false;
 on_ceiling = place_meeting(x, y - 1, obj_collision);
 
 // Set up iframes timers

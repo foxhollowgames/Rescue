@@ -34,7 +34,7 @@ bottom_chance = 100;
 
 spawn_y = noone;
 
-most_recent = instance_create_layer(0, 0, "platform_layer", obj_ground);
+most_recent = instance_create_layer(50, 50, "platform_layer", obj_ground);
 most_recent_enemy = instance_create_layer(700, 200, "Instances", obj_enemy);
 
 // Speed Ring variables

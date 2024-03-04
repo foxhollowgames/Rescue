@@ -43,6 +43,8 @@ draw_text(x, y-50, _state);
 
 draw_text(x, y - 75, "Tribute: " + string(global.player.tribute));
 
+draw_text(x, y - 100, "on_floor: " + string(on_floor));
+
 draw_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom, true);
 
 

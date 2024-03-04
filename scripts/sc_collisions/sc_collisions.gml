@@ -8,18 +8,9 @@ function check_collision()
 {
 	
 	// Check floor collision
-	// State machine is incredibly busted here, don't know why
-
 	
-	if ( (state != STATES.IDLE || state != STATES.JUMPING) && place_meeting(x, bbox_bottom + 1, obj_collision))
+	if (place_meeting(x, bbox_bottom + 1, obj_collision))
 	{
-		if (object_get_name(object_index) == "obj_player")
-		{
-			if (!on_floor)
-			{
-			}
-
-		}
 		
 		on_floor = true;
 
@@ -35,7 +26,5 @@ function check_collision()
 	{
 		on_floor = false;
 	}
-	
-	return false;
 	
 }

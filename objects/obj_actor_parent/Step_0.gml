@@ -1,8 +1,8 @@
 // Run the move function
 if (global.player.has_jumped)
 {
-	sc_moving();
 	check_collision();
+	sc_moving();
 }
 
 

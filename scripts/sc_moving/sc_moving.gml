@@ -1,9 +1,6 @@
 function sc_moving() 
 {
-	
-	// TODO: Prevent any movement outside of the top or right sides of the room
-	
-	// TODO: This flag is for platforms and tribute currently, should get refactored out
+
 	if (state == STATES.IDLE)
 	{
 		vel_x = global.scroll_speed;
@@ -20,13 +17,13 @@ function sc_moving()
 				vel_x = 0;
 			}
 			
-			if (y - vel_y <= 0)
+			if (y - vel_y <= sprite_height)
 			{
 				vel_y = 0;
 			}
 	
 			// Move and collide
-			move_and_collide(vel_x, vel_y, [obj_collision]);
+			move_and_collide(vel_x, vel_y, [obj_collision], 100);
 		}
 		
 		//  Enemy movement
@@ -54,24 +51,21 @@ function sc_moving()
 	// Do we want the vel_y here or in the objects?
 	
 	// TODO: Investigate why the player is not landing on the platform
+	// Gravity
 	if (state == STATES.JUMPING)
 	{
 		vel_y += grav_speed/4;
 	}
 	
-	else if (state != STATES.IDLE || !on_floor)
+	else if (state != STATES.IDLE)
 	{
 		vel_y += grav_speed;
-		if (object_get_parent(object_index) == obj_actor_parent)
+		if (object_get_parent(object_index) == obj_actor_parent && state == STATES.FALLING)
 		{
 			sprite_index = fall_sprite;
 		}
 	}	
-	
-	else
-	{
-		vel_y = 0;
-	}
+
 
 }
 

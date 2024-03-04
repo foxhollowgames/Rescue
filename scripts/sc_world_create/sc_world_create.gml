@@ -32,7 +32,7 @@ function sc_world_create()
 	// Set up spawning
 	global.tribute_spawn_rate = 10;
 	global.large_tribute_chance = 25;
-	global.min_distance = 150;
+	global.min_distance = 300;
 	
 	// Speed Ring variables
 	global.speed_ring_chance = 0;

@@ -15,10 +15,7 @@
     "name": "Timelines",
     "path": "folders/Timelines.yy",
   },
-  "spriteId": {
-    "name": "spr_platform",
-    "path": "sprites/spr_platform/spr_platform.yy",
-  },
+  "spriteId": null,
   "spriteNoExport": false,
   "textureGroupId": {
     "name": "Default",
