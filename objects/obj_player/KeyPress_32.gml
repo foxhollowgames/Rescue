@@ -1,4 +1,4 @@
-/// @ Start the jump script and increment jump count
+/// @ Start the game
 
 if (!global.player.has_jumped)
 {

@@ -15,7 +15,7 @@ function check_collision()
 	
 	if (on_floor)
 	{	
-		on_floor = true;
+		//on_floor = true;
 
 		if (object_get_parent(object_index) == obj_actor_parent)
 		{
@@ -25,14 +25,15 @@ function check_collision()
 		return true;
 	}
 	
-	if (on_r_wall)
-	{
-		//on_r_wall = true;
-	}
-	
 	else
 	{
 		on_floor = false;
 	}
+	
+	if (on_r_wall)
+	{
+		//on_r_wall = true;
+	}
+
 	
 }
