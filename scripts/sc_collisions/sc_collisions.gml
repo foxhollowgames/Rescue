@@ -6,25 +6,19 @@
 // or false if a collision was not found.
 function check_collision() 
 {
+	on_floor = collision_line(bbox_left, bbox_bottom + 1, bbox_right, bbox_bottom + 1, [ obj_collision ], false, false) != noone;
 	
 	// Check floor collision
 	
-	if (place_meeting(x, bbox_bottom + 1, obj_collision))
+	if (on_floor)
 	{
 		
-		on_floor = true;
-
 		if (object_get_parent(object_index) == obj_actor_parent)
 		{
 			sprite_index = idle_sprite;
 			jump.current_count = 0;
 		}
 		return true;
-	}
-	
-	else
-	{
-		on_floor = false;
 	}
 	
 }
