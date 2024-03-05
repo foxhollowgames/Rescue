@@ -17,9 +17,10 @@ function sc_moving()
 				vel_x = 0;
 			}
 			
-			if (y - vel_y <= sprite_height)
+			if (y - vel_y <= 0)
 			{
 				vel_y = 0;
+				vel_y++;
 			}
 			
 			if (on_r_wall || on_l_wall)
@@ -44,9 +45,9 @@ function sc_moving()
 		{
 			move_and_collide(vel_x, vel_y, [ obj_collision ], 100);
 
-			if (collision_line(bbox_left - 1, bbox_top, bbox_left - 1, bbox_bottom, [ obj_player ], false, false) != noone) 
+			if (collision_line(bbox_left - 5, bbox_top, bbox_left - 5, bbox_bottom, [ obj_player ], false, false) != noone) 
 			{
-				obj_player.vel_x = global.scroll_speed;
+				obj_player.vel_x = 0;
 				repeat (abs(vel_x)) {
 					obj_player.x--;
 				}

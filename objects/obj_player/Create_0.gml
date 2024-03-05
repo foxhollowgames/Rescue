@@ -36,7 +36,7 @@ gather_tribute = false;
 // Dash variables
 attack_speed_x = 10;
 attack_speed_y = 15;
-attack_frames = 20;
+attack_frames = 15;
 attack_counter = attack_frames;
 attack_dir = noone;
 closest_enemy = noone;

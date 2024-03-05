@@ -96,9 +96,13 @@ switch (state)
 		}
 		
 	case STATES.ATTACKING:
-		if (vel_x == 0)
+		if (on_floor)
 		{
 			state = STATES.IDLE;
+		}
+		else if (attack_counter <= 0)
+		{
+			state = STATES.FALLING;
 		}
 			
 	case STATES.DEATH:

@@ -145,9 +145,8 @@ jumpKeyHold = keyboard_check(vk_space);
 	// End the attack
 	else if (state == STATES.ATTACKING && attack_counter <= 0)
 	{
-		vel_x = 0;
-		vel_y = 0;
-		attack_counter = attack_frames;
+		vel_x = jump_x;
+		vel_y = grav_speed;
 		image_blend = make_color_hsv(255, 255, c_white);
 		attack_dir = noone;
 	}
@@ -156,6 +155,7 @@ jumpKeyHold = keyboard_check(vk_space);
 	if (state != STATES.ATTACKING)
 	{
 		vulnerable_counter = vulnerable_frames;
+		attack_counter = attack_frames;
 	}
 
 //show_debug_message(attack_counter);
