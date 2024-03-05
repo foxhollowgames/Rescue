@@ -21,6 +21,12 @@ function sc_moving()
 			{
 				vel_y = 0;
 			}
+			
+			if (on_r_wall || on_l_wall)
+			{
+				vel_x = 0;
+
+			}
 	
 			// Move and collide
 			move_and_collide(vel_x, vel_y, [obj_collision], 100);
@@ -36,21 +42,23 @@ function sc_moving()
 		// Platform movement
 		else if ((object_get_parent(object_index) == obj_collision))
 		{
-			move_and_collide(vel_x, vel_y, [obj_collision, obj_player]);
+			move_and_collide(vel_x, vel_y, [ obj_collision ], 100);
+
+			if (collision_line(bbox_left - 1, bbox_top, bbox_left - 1, bbox_bottom, [ obj_player ], false, false) != noone) 
+			{
+				obj_player.vel_x = global.scroll_speed;
+				repeat (abs(vel_x)) {
+					obj_player.x--;
+				}
+			}
 		}
 		
 	}
 	
 	else x += global.scroll_speed;
 	
-	//if (object_get_name(object_index) == "obj_player")
-	//{
-	//	//show_debug_message(vel_y)
-	//}
-	
 	// Do we want the vel_y here or in the objects?
-	
-	// TODO: Investigate why the player is not landing on the platform
+
 	// Gravity
 	if (state == STATES.JUMPING)
 	{

@@ -6,15 +6,16 @@ jumpKeyHold = keyboard_check(vk_space);
 
 ///////// Jumping code
 
+	if (on_floor) {
+		vel_y = 0;
+	}
+
 	// Reset the jump if you are idle
 	if (state == STATES.IDLE || on_floor)
 	{
 		jumpCount = 0;
 		vel_x = global.scroll_speed;
-		vel_y = 0;
-	
-		 //Set the jump timer
-		//jumpTimer = jumpHoldFrames;
+		//vel_y = 0;
 	}
 	// If you fall off of a platform somehow, use up a jump
 	else

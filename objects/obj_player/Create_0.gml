@@ -12,6 +12,8 @@ revives = 0;
 //jump.frame_current = 0;
 //can_rise = true;
 on_floor = true;
+on_r_wall = false;
+on_l_wall = false;
 
 // Set sprites for states
 moving_sprite = noone;

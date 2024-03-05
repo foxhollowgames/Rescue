@@ -44,6 +44,10 @@ draw_text(x, y-50, _state);
 draw_text(x, y - 75, "Tribute: " + string(global.player.tribute));
 
 draw_text(x, y - 100, "on_floor: " + string(on_floor));
+draw_text(x, y - 125, "on_r_wall: " + string(on_r_wall));
+draw_text(x, y - 150, "on_l_wall: " + string(on_l_wall));
+draw_text(x, y + 150, "jumpKeyPressed: " + string(jumpKeyPressed));
+draw_text(x, y + 175, "jumpCount: " + string(jumpCount));
 
 draw_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom, true);
 

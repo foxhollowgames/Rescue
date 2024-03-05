@@ -9,9 +9,12 @@ function check_collision()
 	
 	// Check floor collision
 	
-	if (place_meeting(x, bbox_bottom + 1, obj_collision))
-	{
-		
+	on_floor = collision_line(bbox_left, bbox_bottom + 1, bbox_right, bbox_bottom + 1, [ obj_collision ], false, false) != noone;
+	on_r_wall = collision_line(bbox_right + 1, bbox_top, bbox_right + 1, bbox_bottom, [ obj_collision ], false, false) != noone;
+	on_l_wall = collision_line(bbox_left - 1, bbox_top, bbox_left - 1, bbox_bottom, [ obj_collision ], false, false) != noone;
+	
+	if (on_floor)
+	{	
 		on_floor = true;
 
 		if (object_get_parent(object_index) == obj_actor_parent)
@@ -20,6 +23,11 @@ function check_collision()
 			jump.current_count = 0;
 		}
 		return true;
+	}
+	
+	if (on_r_wall)
+	{
+		//on_r_wall = true;
 	}
 	
 	else
