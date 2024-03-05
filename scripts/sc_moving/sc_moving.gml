@@ -36,7 +36,13 @@ function sc_moving()
 		// Platform movement
 		else if ((object_get_parent(object_index) == obj_collision))
 		{
-			move_and_collide(vel_x, vel_y, [obj_collision, obj_player]);
+			move_and_collide(vel_x, vel_y, [ obj_collision ]);
+			
+			if (collision_line(bbox_left - 1, bbox_top, bbox_left - 1, bbox_bottom, [ obj_player ], false, false) != noone) {
+				repeat (abs(vel_x)) {
+					obj_player.x--;
+				}
+			}
 		}
 		
 	}
