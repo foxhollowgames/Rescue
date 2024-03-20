@@ -1,117 +1,26 @@
 // Run the move function
+
+if (global.paused)
+{
+	image_speed = 0;
+	exit;
+}
+else
+{
+	image_speed = 1;
+}
+
 if (global.player.has_jumped)
 {
 	check_collision();
 	sc_moving();
+	sc_out_of_bounds();
 }
-
-
-// Check for states, then set appropriate sprite and run relevant script
-switch (state)
+else if (object_index == obj_player && obj_player.jumpCount >= obj_player.jumpMax)
 {
-	case STATES.IDLE:
-		if (vel_y < 0)
-		{
-			state = STATES.JUMPING;
-		}
-		
-		if (vel_y > 0)
-		{
-			state = STATES.FALLING;
-		}
-		
-		if (vulnerable_counter < vulnerable_frames && vulnerable_counter != 0)
-		{
-			state = STATES.VULNERABLE;
-		}
-		
-		if (damaged_counter < damaged_frames && damaged_counter > 0)
-		{
-			state = STATES.DAMAGED;
-		}
-		break;
-			
-	case STATES.JUMPING:
-		if (vel_y >= 0)
-		{
-			state = STATES.FALLING;
-		}
-		
-		if (damaged_counter < damaged_frames && damaged_counter > 0)
-		{
-			state = STATES.DAMAGED;
-		}
-		
-		break;
-		
-	case STATES.FALLING:
-		if (on_floor)
-		{
-			state = STATES.IDLE;
-		}
-		
-		if (vel_y < 0)
-		{
-			state = STATES.JUMPING;
-		}
-		
-		if (damaged_counter > 0)
-		{
-			state = STATES.DAMAGED;
-		}
-		
-		break;
-			
-			
-	case STATES.DAMAGED:
-		// Run an animation, then reset state to idle
-		if (damaged_counter <= 0)
-		{
-			if (on_floor)
-			{
-				state = STATES.IDLE;
-			}
-			
-			else if (vel_y > 0)
-			{
-				state = STATES.JUMPING;
-			}
-			
-			else
-			{
-				state = STATES.FALLING;
-			}
-		}
-		
-		break;
-		
-	case STATES.VULNERABLE:
-		if (vulnerable_counter <= 0)
-		{
-			state = STATES.ATTACKING;
-		}
-		if (damaged_counter > 0)
-		{
-			state = STATES.DAMAGED;
-		}
-		
-	case STATES.ATTACKING:
-		if (on_floor)
-		{
-			state = STATES.IDLE;
-		}
-		else if (attack_counter <= 0)
-		{
-			state = STATES.FALLING;
-		}
-			
-	case STATES.DEATH:
-		// Run the animation, then destroy
-		break;
-			
-	case STATES.MOVING:
-		// Check if attacking, then move state
-		break;	
+	check_collision();
+	sc_moving();
+	sc_out_of_bounds();
 }
 
 if (damaged_counter > 0)

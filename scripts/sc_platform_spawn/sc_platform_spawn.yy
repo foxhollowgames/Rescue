@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"sc_platform_spawn",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"sc_platform_spawn",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

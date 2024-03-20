@@ -3,17 +3,23 @@ function sc_open(){
 		// Increment tribute_total by value
 		// Destroy the instance
 		
-	if (open_timer < open_timer_duration)
+	if (self.open_timer < self.open_timer_duration)
 	{
+		self.open_timer++;
 		exit;
 	}
 	
-	global.player.tribute += value;
-	global.player.tribute_counter++;
-	if (global.player.tribute_counter >= global.player.gather_rate && obj_player.gather_tribute)
+	else
 	{
-		global.player.tribute++;
-		global.player.tribute_counter = 0;
+		global.player.tribute += self.value;
+		//show_debug_message(global.player.tribute);
+				//show_debug_message(self.value);
+		global.player.tribute_counter++;
+		if (global.player.tribute_counter >= global.player.gather_rate && obj_player.gather_tribute)
+		{
+			global.player.tribute++;
+			global.player.tribute_counter = 0;
+		}
+		instance_destroy();
 	}
-	instance_destroy(self);
 }

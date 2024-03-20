@@ -6,7 +6,7 @@
   "name":"sc_stop_scroll",
   "parent":{
     "name":"Movement",
-    "path":"folders/Scripts/World Setup/Actions/Movement.yy",
+    "path":"folders/Scripts/Actions/Movement.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

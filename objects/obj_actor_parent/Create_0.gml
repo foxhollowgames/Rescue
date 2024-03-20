@@ -35,7 +35,7 @@ damaged_frames = 120;
 damaged_counter = 0;
 
 // Set up vulnerability timers for enemy dodge windows
-vulnerable_frames = 15;
+vulnerable_frames = 45;
 vulnerable_counter = vulnerable_frames;
 
 // Set up cooldown after attack

@@ -1,2 +1,9 @@
-/// @description Insert description here
-// You can write your code in this editor
+if (global.paused)
+{
+	exit;
+}
+
+if (global.player.has_jumped)
+{
+	sc_moving();
+}

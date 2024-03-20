@@ -2,4 +2,6 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function sc_stop_scroll(){
 	global.scroll_speed = 0;
+	obj_spawner.can_spawn = false;
+	global.player.has_jumped = false;
 }

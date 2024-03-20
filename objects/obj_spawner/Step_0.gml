@@ -1,5 +1,12 @@
-/// @description Spawn in platforms
+/// @description Spawn in platforms, tribute, enemies, and hazards
+if (global.paused)
+{
+	exit;
+}
 
+if (can_spawn)
+{
+	
 // Decrement checkpoint timer
 if (global.player.has_jumped)
 {
@@ -8,7 +15,13 @@ if (global.player.has_jumped)
 
 if (global.checkpoint_counter <= 0)
 {
+	global.progress++;
 	room_goto(rm_shrine);
+}
+
+if (global.progress == global.act_1_progress)
+{
+	room_goto(rm_to_be_continued);
 }
 
 if (random_counter == 0)
@@ -24,11 +37,9 @@ else
 
 
 // PLATFORM AND TRIBUTE SPAWNING
-// TODO: TRIBUTE SPAWNER
 var _platform_count = instance_number(obj_ground);
 
-// most_recent is breaking after a long time. Platforms stop spawning, then it loses the reference to the object.
-if (instance_exists(obj_player) && global.player.has_jumped && ((room_width - most_recent.bbox_right) > global.min_distance))
+if (global.player.has_jumped)
 {
 	// Keep this so we can dynamically change which type of platform spawns based on god and progress %
 	var _platform_make = obj_ground;
@@ -61,26 +72,70 @@ if (instance_exists(obj_player) && global.player.has_jumped && ((room_width - mo
 		bottom_chance = 15;
 	}
 	
-	// Check if the player can actually jump to the next platform and if not, lower it down some. This needs refactoring eventually
-	if (most_recent.y - 300 > spawn_y)
+	//// Check if the player can actually jump to the next platform and if not, lower it down some. This needs refactoring eventually
+	//if (most_recent.y - 300 > spawn_y)
+	//{
+	//	spawn_y += 400;
+	//}
+
+	if (instance_exists(most_recent))
 	{
-		spawn_y += 400;
+	
+			var _r_offset = irandom(15);
+			if (platform_counter_1 == 0)
+			{
+				sc_platform_spawn(_platform_make);				
+				platform_counter_1 = platform_frames_1 + _r_offset;
+			}
+			
+			if (platform_counter_2 == 0)
+			{
+				sc_platform_spawn(_platform_make);
+				platform_counter_2 = platform_frames_2 + _r_offset;
+			}
+			
+			if (platform_counter_3 == 0)
+			{
+				sc_platform_spawn(_platform_make);
+				platform_counter_3 = platform_frames_3 + _r_offset;
+			}
+			
+			if (platform_counter_4 == 0)
+			{
+				sc_platform_spawn(_platform_make);
+				platform_counter_4 = platform_frames_4 + _r_offset;
+			}
+			
+			platform_counter_1--;
+			platform_counter_2--;
+			platform_counter_3--;
+			platform_counter_4--;
+//}
+	}
+	else
+	{
+		most_recent = instance_create_layer((room_width * 1.1), spawn_y, "platform_layer", _platform_make);			
 	}
 	
 	var _bounce_chance = irandom(100);
-	if (global.platform_bounce_chance >= _bounce_chance)
+	if (global.platform_bounce_chance > _bounce_chance)
 	{
-		_platform_make = obj_bouncy;
+		most_recent.bouncy = true;
 	}
-		
-	most_recent = instance_create_layer(room_width + 2, spawn_y, "platform_layer", _platform_make);
 	
 	// Spawn in tribute on top of the platform
 	// If chance triggers
-	if (random_spawn_number <= global.tribute_spawn_rate)
+	if (random_spawn_number <= global.tribute_spawn_rate + (global.progress * tribute_scaler) && !most_recent.tribute_spawned)
 	{
+		
+		most_recent.tribute_spawned = true;
 		var _r = irandom(100);
-		if (_r <= global.large_tribute_chance)
+		if (_r < global.huge_tribute_chance)
+		{
+			instance_create_layer(most_recent.x, most_recent.bbox_top - 75, "Instances", obj_tribute_huge);
+		}
+			
+		else if (_r < global.large_tribute_chance)
 		{
 			instance_create_layer(most_recent.x, most_recent.bbox_top - 75, "Instances", obj_tribute_large);
 		}
@@ -91,6 +146,7 @@ if (instance_exists(obj_player) && global.player.has_jumped && ((room_width - mo
 		}
 		
 	}
+
 	
 }
 
@@ -128,9 +184,24 @@ if (instance_exists(obj_player) && global.player.has_jumped)
 		bottom_chance = 15;
 	}
 	
-	if (random_spawn_number <= global.speed_ring_chance)
+	
+	if (random_spawn_number < global.speed_ring_chance)
 	{
-		most_recent_ring = instance_create_layer(room_width + 2, spawn_y, "platform_layer", _ring_make);
+		while (collision_rectangle(room_width - (sprite_get_width(spr_speed_ring) / 2), spawn_y - (sprite_get_height(spr_speed_ring) / 2), room_width, spawn_y + ((sprite_get_height(spr_speed_ring) / 2)), all, false, true))
+		{
+			spawn_y++;
+		}
+		if (instance_exists(most_recent_ring))
+		{
+			if ((room_width - most_recent_ring.bbox_right) > global.min_distance)
+			{
+				most_recent_ring = instance_create_layer(room_width + sprite_width, spawn_y, "platform_layer", _ring_make);
+			}
+		}
+		else
+		{
+			most_recent_ring = instance_create_layer(room_width + sprite_width, spawn_y, "platform_layer", _ring_make);			
+		}
 	}
 }
 
@@ -167,10 +238,36 @@ if (instance_exists(obj_player) && global.player.has_jumped)
 		middle_chance = 100;
 		bottom_chance = 15;
 	}
-	
-	if (random_spawn_number <= global.barrel_chance)
+
+	if (global.barrel_chance > 0)
 	{
-		most_recent_ring = instance_create_layer(room_width + 2, spawn_y, "platform_layer", _ring_make);
+		if (barrel_spawn_counter <= 0 )
+		{
+			if (random_spawn_number < global.barrel_chance)
+			{
+				while (place_meeting(room_width - 2, spawn_y, all))
+				{
+					spawn_y++;
+				}
+				if (instance_exists(most_recent_barrel))
+				{
+					if ((room_width - most_recent_barrel.bbox_right) > global.min_distance)
+					{
+						most_recent_barrel = instance_create_layer(room_width + sprite_width, spawn_y, "platform_layer", _barrel_make);
+					}
+				}
+				else 
+				{
+					most_recent_barrel = instance_create_layer(room_width + sprite_width, spawn_y, "platform_layer", _barrel_make);
+				}
+				barrel_spawn_counter = barrel_spawn_frames;
+			}
+		} 
+		else
+		{
+			barrel_spawn_counter--;
+			//show_debug_message(barrel_spawn_counter);
+		}
 	}
 }
 
@@ -234,9 +331,14 @@ if (instance_exists(obj_player) && _enemy_count < 3 && global.player.has_jumped)
 		bottom_chance = 15;
 	}
 	
-	if (random_spawn_number <= global.spawn_chance && spawn_enabled)
+	if (random_spawn_number <= global.spawn_chance * global.progress && spawn_enabled)
 	{
-		most_recent_enemy = instance_create_layer(room_width - 2, spawn_y, "Instances", _enemy_make);
+		
+		while (place_meeting(room_width - 2, spawn_y, all))
+		{
+			spawn_y++;
+		}
+		most_recent_enemy = instance_create_layer(room_width + sprite_width, spawn_y, "Instances", _enemy_make);
 		spawn_enabled = false;
 	}
 	
@@ -244,3 +346,5 @@ if (instance_exists(obj_player) && _enemy_count < 3 && global.player.has_jumped)
 
 
 // TODO: HAZARD SPAWNER
+
+}

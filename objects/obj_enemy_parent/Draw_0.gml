@@ -2,15 +2,20 @@
 
 draw_self();
 
+if (!global.debug)
+{
+	exit;
+}
+
 if (radius_draw)
 {
 	draw_set_colour (c_red);
 	draw_set_alpha(0.3);
 	draw_circle(x, y, attack_radius, false);
 	draw_set_alpha(1);
+	draw_set_color(c_black);
 }
 
-draw_set_color(c_black);
 
 if (state == STATES.VULNERABLE)
 {
@@ -71,3 +76,5 @@ else if (state == STATES.MOVING)
 draw_text(x, y-50, _state);
 
 draw_text(x, y-75, vulnerable_counter);
+
+draw_text(x, y - 100, attack_counter);

@@ -3,9 +3,11 @@ event_inherited();
 
 global.player.has_jumped = false;
 
+debug = false;
+
 state = STATES.IDLE;
 
-health = 3;
+health = 30;
 revives = 0;
 
 
@@ -27,8 +29,8 @@ fall_sprite = spr_dog_idle;
 x_boost = 0;
 y_boost = 0;
 
-moveSpd = 2;
-grav_speed = .25;
+moveSpd = 1;
+grav_speed = .5;
 
 // Tribute variables
 gather_tribute = false;
@@ -36,14 +38,15 @@ gather_tribute = false;
 // Dash variables
 attack_speed_x = 10;
 attack_speed_y = 15;
-attack_frames = 15;
+attack_frames = 30;
 attack_counter = attack_frames;
 attack_dir = noone;
 closest_enemy = noone;
+contact = false
 
 // Jumping variables
-jumpSpd = -3;
-jump_x = 3;
+jumpSpd = -5;
+jump_x = 1;
 jumpBoost = -2.5;
 jumpMax = 2;
 jumpCount = 0;
@@ -67,8 +70,8 @@ bomb_hazards_counter = bomb_hazards_frames;
 teleport_dash = false;
 
 gravity_well = false;
-gravity_well_radius = 15;
-gravity_well_strength = 5;
+gravity_well_radius = 500;
+gravity_well_strength = 1.35;
 
 dash_heal = false;
 dash_counter = 0;
@@ -76,35 +79,23 @@ dash_count_trigger = 3;
 
 shield_boon = false;
 shield = 0;
-shield_timer = 0;
-shield_frames = 900;
-shield_radius = 5;
+shield_max = 0;
+shield_frames = 450;
+shield_timer = shield_frames;
+shield_radius = 100;
 
 projectile_shield_boon = false;
 projectile_shield = 0;
-projectile_shield_timer = 0;
+projectile_shield_max = 0;
 projectile_shield_frames = 900;
-projectile_shield_radius = 7;
+projectile_shield_timer = projectile_shield_frames;
+projectile_shield_radius = 125;
 
 extra_vulnerability = false;
 
-// Apply boons
-global.player.acquired_boons  = [];
-for (var _i = 0; _i < array_length(global.pantheon); _i++)
-{
-	if (global.pantheon[_i].tribute_total > 5)
-	{
-		array_push(global.player.acquired_boons, global.pantheon[_i].boons[0]);
-	}
-	if (global.pantheon[_i].tribute_total > 10)
-	{
-		array_push(global.player.acquired_boons, global.pantheon[_i].boons[1]);
-	}
-	if (global.pantheon[_i].tribute_total > 15)
-	{
-		array_push(global.player.acquired_boons, global.pantheon[_i].boons[2]);
-	}
-}
+
+
+// BOONS
 
 
 // Transform the boons into actual effects
@@ -119,7 +110,7 @@ for (var _i = 0; _i < array_length(global.player.acquired_boons); _i++)
 		{
 			obj_actor_parent.vulnerable_frames += 12;
 		}
-		else if (global.player.acquired_boons[_i] == "Double Jump")
+		else if (global.player.acquired_boons[_i] == "Extra Jump")
 		{
 			jumpMax++;
 		}
@@ -142,6 +133,10 @@ for (var _i = 0; _i < array_length(global.player.acquired_boons); _i++)
 		else if (global.player.acquired_boons[_i] == "More Frequent Tribute")
 		{
 			global.tribute_spawn_rate += 5;
+		}
+		else if (global.player.acquired_boons[_i] == "More Frequent Shrines")
+		{
+			global.checkpoint_frames -= 600;
 		}
 		else if (global.player.acquired_boons[_i] == "Platform Spawn Rate Up")
 		{
@@ -167,7 +162,7 @@ for (var _i = 0; _i < array_length(global.player.acquired_boons); _i++)
 		{
 			grav_speed -= .05
 		}	
-		else if (global.player.acquired_boons[_i] == "Max Health Up")
+		else if (global.player.acquired_boons[_i] == "Extra Life")
 		{
 			health++;
 		}
@@ -185,9 +180,10 @@ for (var _i = 0; _i < array_length(global.player.acquired_boons); _i++)
 		{
 			teleport_dash = true;
 		}
-		else if (global.player.acquired_boons[_i] == "Gravity well")
+		else if (global.player.acquired_boons[_i] == "Gravity Well")
 		{
 			gravity_well = true;
+			//show_debug_message(gravity_well);
 		}
 		else if (global.player.acquired_boons[_i] == "Every 3 Dashes, Heal")
 		{
@@ -196,26 +192,39 @@ for (var _i = 0; _i < array_length(global.player.acquired_boons); _i++)
 		else if (global.player.acquired_boons[_i] == "Shield")
 		{
 			shield_boon = true;
+			shield_max++;
 			shield++;
 		}
+		
+		// NOTE: NO projectiles exist in the game yet so functionality can't be verified
 		else if (global.player.acquired_boons[_i] == "Projectile Shield")
 		{
 			projectile_shield_boon = true;
+			projectile_shield_max++;
 			projectile_shield++;
 		}
+		
 		else if (global.player.acquired_boons[_i] == "Bouncy Platforms")
 		{
 			global.platform_bounce_chance += 5;
 		}
+		
 		else if (global.player.acquired_boons[_i] == "Speed Rings")
 		{
-			global.speed_ring_chance += 5;
+			global.speed_ring_chance += 1;
 		}
+		
 		else if (global.player.acquired_boons[_i] == "Barrel")
 		{
-			global.barrel_chance += 5;
+			global.barrel_chance += 1;
+		}
+		
+		else if (global.player.acquired_boons[_i] == "Huge Tribute Chance")
+		{
+			global.huge_tribute_chance += 5;
 		}
 }
+
 
 
 // Start the checkpoint timer

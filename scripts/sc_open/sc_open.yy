@@ -6,7 +6,7 @@
   "name":"sc_open",
   "parent":{
     "name":"Actions",
-    "path":"folders/Scripts/World Setup/Actions.yy",
+    "path":"folders/Scripts/Actions.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

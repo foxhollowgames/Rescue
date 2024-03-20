@@ -3,6 +3,7 @@
   "%Name":"obj_ground",
   "eventList":[
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_ground",
@@ -33,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_platform_2",
-    "path":"sprites/spr_platform_2/spr_platform_2.yy",
+    "name":"spr_platform_3_small",
+    "path":"sprites/spr_platform_3_small/spr_platform_3_small.yy",
   },
   "spriteMaskId":null,
   "visible":true,

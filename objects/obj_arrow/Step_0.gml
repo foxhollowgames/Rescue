@@ -1,6 +1,9 @@
 /// @description Rotate up and down until the player jumps, then give speed boost
 
-
+if (global.paused)
+{
+	exit;
+}
 
 if (obj_barrel.scroll_rate_counter <= 0)
 {
@@ -18,7 +21,7 @@ if (image_angle >= 45)
 	angle_sign = -1;
 }
 
-else if (image_angle >= -45)
+else if (image_angle <= -45)
 {
 	angle_sign = 1;
 }

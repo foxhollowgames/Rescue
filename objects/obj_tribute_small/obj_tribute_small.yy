@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_tribute_small",
-    "path":"sprites/spr_tribute_small/spr_tribute_small.yy",
+    "name":"spr_tribute_small_small",
+    "path":"sprites/spr_tribute_small_small/spr_tribute_small_small.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -1,4 +1,93 @@
 draw_self();
+
+
+// Visualize jumps left
+for (var _i = 0; _i < jumpMax; _i++)
+{
+	draw_set_halign(fa_right);
+	if (_i < jumpCount)
+	{
+		draw_sprite_ext(spr_arrow, 0, bbox_left - 25, bbox_top + (25 * _i), .3, .3, 90, c_blue, .3);
+	}
+	else
+	{
+		draw_sprite_ext(spr_arrow, 0, bbox_left - 25, bbox_top + (25 * _i), .3, .3, 90, c_blue, 1);	
+	}
+	
+	if (_i + 1 = jumpMax)
+	{
+		if (jumpCount > jumpMax)
+		{
+			draw_sprite_ext(spr_arrow, 0, bbox_left - 25, bbox_top + (25 * _i), .3, .3, 270, c_red, .3);
+		}
+		else
+		{
+			draw_sprite_ext(spr_arrow, 0, bbox_left - 25, bbox_top + (25 * _i), .3, .3, 270, c_red, 1);
+		}
+	}
+	//for (var _j = 0; _j < jumpMax; _j++)
+	//{
+	//	draw_sprite(bbox_left - 25, bbox_top + (25 * _i), _j);
+	//}
+	
+	//for (var _j = 0; _j < jumpMax; _j++)
+	//{
+		//draw_sprite_ext(spr_arrow, 0, bbox_left - 25, bbox_top + (25 * _i), .3, .3, 90, c_blue, 1);
+	//}
+
+	draw_set_halign(fa_left);
+	draw_set_alpha(1);
+}
+
+// Gravity well visualization
+if (gravity_well)
+{
+	draw_set_color(c_purple);
+	draw_set_alpha(0.3);
+	draw_circle(x, y, gravity_well_radius, false);
+	draw_set_color(c_black);
+	draw_set_alpha(1);
+}
+
+// Shield visualizations
+if (shield_boon && shield >= 1)
+{
+	draw_set_alpha(0.3);
+	switch(shield_max)
+	{
+		// TODO: Future proof this. Either dynamically adjust color mathematically or make iterations for each possible step
+		case 1:
+			draw_set_color(c_blue);
+			break;
+		case 2:
+			draw_set_color(c_aqua);
+			break;
+		case 3:
+			draw_set_color(c_olive);
+			break;
+		case 4:
+			draw_set_color(c_maroon);
+			break;
+	}
+	draw_circle(x, y, shield_radius, false);
+	draw_set_color(c_black);
+	draw_set_alpha(1);
+}
+
+if (projectile_shield_boon && projectile_shield >= 1)
+{
+	draw_set_color(c_teal);
+	draw_set_alpha(0.3);
+	draw_circle(x, y, projectile_shield_radius, false);
+	draw_set_color(c_black);
+	draw_set_alpha(1);
+}
+
+if (!global.debug)
+{
+	exit;
+}
+
 draw_set_color(c_black);
 
 
@@ -43,7 +132,7 @@ draw_text(x, y-50, _state);
 
 draw_text(x, y - 75, "Tribute: " + string(global.player.tribute));
 
-draw_text(x, y - 100, "attack_counter: " + string(attack_counter));
+draw_text(x, y - 100, projectile_shield);
 
 //draw_text(x, y - 100, "on_floor: " + string(on_floor));
 //draw_text(x, y - 125, "on_r_wall: " + string(on_r_wall));
@@ -53,35 +142,7 @@ draw_text(x, y - 100, "attack_counter: " + string(attack_counter));
 
 draw_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom, true);
 
-
-// Draw health
-for (var _health_count = 0; _health_count < health; _health_count++)
+if (instance_exists(closest_enemy))
 {
-	draw_sprite(spr_dog_idle, 0, 50 + (_health_count * 100), 50);
-}
-
-// Visualize jumps left
-draw_healthbar(x-20,y, x-20, y+40, round((jumpCount / jumpMax)*100), c_black,c_red,c_lime,3,true,true);
-
-// Gravity well visualization
-if (gravity_well)
-{
-	draw_set_color(c_purple);
-	draw_circle(x, y, gravity_well_radius, false);
-	draw_set_color(c_white);
-}
-
-// Shield visualizations
-if (shield_boon)
-{
-	draw_set_color(c_blue);
-	draw_circle(x, y, shield_radius, false);
-	draw_set_color(c_white);
-}
-
-if (projectile_shield_boon)
-{
-	draw_set_color(c_teal);
-	draw_circle(x, y, projectile_shield_radius, false);
-	draw_set_color(c_white);
+	draw_line(x, y, closest_enemy.x, closest_enemy.y);
 }

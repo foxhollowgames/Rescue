@@ -1,8 +1,8 @@
 {
   "$GMSprite":"",
   "%Name":"spr_platform_3",
-  "bboxMode":0,
-  "bbox_bottom":204,
+  "bboxMode":2,
+  "bbox_bottom":66,
   "bbox_left":2,
   "bbox_right":299,
   "bbox_top":3,

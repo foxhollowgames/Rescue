@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"sc_sine_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"sc_sine_movement",
+  "parent":{
+    "name":"Movement",
+    "path":"folders/Scripts/Actions/Movement.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -5,10 +5,15 @@ event_inherited();
 
 vel_x = global.scroll_speed;
 
+ini_y = y;
+
+// TODO: Rework into an enum for easy reference
+movement_type = 0;
+
+// Attack variables
 attack_radius = 200;
 attack_speed = 10;
 
-// Attack variables
 attack_speed_x = 10;
 attack_speed_y = 15;
 attack_frames = 60;
@@ -20,6 +25,6 @@ radius_draw = true;
 
 if (obj_player.extra_vulnerability)
 {
-	vulnerable_frames += 30;
+	vulnerable_frames += 60;
 	vulnerable_counter = vulnerable_frames;
 }
